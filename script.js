@@ -52,25 +52,33 @@ btnClose.addEventListener('click', modalCloseHandler);
 //-----------------------------------------
 // Вызов меню навигации
 //-----------------------------------------
-const burgerBtn = document.querySelector('.burger');
 const menu = document.querySelector('.menu');
+const burgerBtn = document.querySelector('.burger');
 
 // burgerBtn.onclick = () => {
 //   menu.classList.toggle('menu--open');
 // }
 burgerBtn.addEventListener('click', () => {
 	menu.classList.toggle('menu--open');
+
+  // При открыто меню убераем вертикльную полосу прокрутки.
+  // Иначе логотип и бургер-кнопка уедут за пределы экран при скролле.
+  if (menu.classList.contains('menu--open')) {
+    document.body.setAttribute('style', 'overflow: hidden');
+  } else document.body.removeAttribute('style');
 });
 
 //--------------------------------------------
 // Слайдер
 //--------------------------------------------
-const slides = document.querySelectorAll('.slider__item');
-const btnPrev = document.querySelector('.slider__btn--prev');
-const btnNext = document.querySelector('.slider__btn--next');
+const sliderBox = document.querySelector(".slider");
+const slides = sliderBox.querySelectorAll('.slider__item');
+const btnPrev = sliderBox.querySelector('.slider__btn--prev');
+const btnNext = sliderBox.querySelector('.slider__btn--next');
 
 let counter = 0;
 let maxStep = slides.length - 1;
+slides[counter].classList.add('slider__item--current');
 
 // Блокируем кнопку НАЗАД если текущий элемент первый
 function isFirst(counter) {
