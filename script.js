@@ -52,21 +52,60 @@ btnClose.addEventListener('click', modalCloseHandler);
 //-----------------------------------------
 // Вызов меню навигации
 //-----------------------------------------
-const menu = document.querySelector('.menu');
+const menuNav = document.querySelector('.menu__nav');
 const burgerBtn = document.querySelector('.burger');
 
 // burgerBtn.onclick = () => {
 //   menu.classList.toggle('menu--open');
 // }
 burgerBtn.addEventListener('click', () => {
-	menu.classList.toggle('menu--open');
+	menuNav.classList.toggle('menu--open');
+	burgerBtn.classList.toggle('menu--open');
 
-  // При открыто меню убераем вертикльную полосу прокрутки.
+  // При открытом меню убераем вертикльную полосу прокрутки.
   // Иначе логотип и бургер-кнопка уедут за пределы экран при скролле.
-  if (menu.classList.contains('menu--open')) {
+  if (menuNav.classList.contains('menu--open')) {
     document.body.setAttribute('style', 'overflow: hidden');
   } else document.body.removeAttribute('style');
 });
+
+//--------------------------------------------
+// Фиксированное меню навигации
+//--------------------------------------------
+const header = document.querySelector('.header'); // нашли хедер
+const mainNav = header.querySelector('.header__wrapper'); // внутри хедера нашли блок с навигацией
+const backScrolledHeader = header.querySelector('.header__backscrolled'); // и нашли дополнительный блок
+const scrolledHeaderStart = header.offsetHeight; // сохранили высоту хедера в константу
+let scrollStarted = 0; // переменная для определения направления скролла - вверх или вниз.
+
+// слушаем событие скролла на окне браузера и при скролле вызываем функцию-коллбэк
+window.addEventListener('scroll', headerScrollHandler);
+
+
+function headerScrollHandler () {
+	// записываем величину текущего скролла в константу
+	const scrollTop = window.pageYOffset; 
+	// сохраняем разницу значений предыдущей и текущей прокрутки. Если delta меньше нуля, прокрутка сделана вверх.
+	const delta = scrollTop - scrollStarted; 
+
+	/* как только высота прокрутки страницы сравняется с высотой хедера, 
+     навигация появится вверху экрана за счёт добавления класса header__nav--fixed */
+	if (scrollTop >= scrolledHeaderStart) {
+		mainNav.classList.add('header__nav--fixed');
+		header.style.marginBottom = `${mainNav.offsetHeight}px`;
+	} else {
+		mainNav.classList.remove('header__nav--fixed');
+		header.style.marginBottom = `0px`;
+	}
+
+	if ((delta < 0) && (scrollTop >= scrolledHeaderStart)) {
+    backScrolledHeader.classList.add('header__backscrolled--show');
+  } else {
+    backScrolledHeader.classList.remove('header__backscrolled--show');
+  }
+	scrollStarted = scrollTop;
+
+};
 
 //--------------------------------------------
 // Слайдер
