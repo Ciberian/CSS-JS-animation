@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 4 task 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="header">
+    
+    <div class="header__nav menu">
+      <a href="#" class="menu__logo-link">
+        <img src="assets/logo.svg"  alt="logo">
+      </a>
+
+      <button class="menu__burger burger" type="button">
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+      </button>
+
+      <nav class="menu__nav main-nav">
+        <div class="main-nav__wrap">
+          <ul class="main-nav__list">
+            <li class="main-nav__item">
+              <a href="#" class="main-nav__link">Работы</a>
+            </li>
+            <li class="main-nav__item">
+              <a href="#" class="main-nav__link">О нас</a>
+            </li>
+            <li class="main-nav__item">
+              <a href="#" class="main-nav__link">Контакты</a>
+            </li>
+          </ul>
+  
+          <address class="main-nav__address"><a class="main-nav__address-link" href="mailto:info@green-house.com">Info@green-house.com</a></address>
+        </div>
+      </nav>
+    </div>
+
+    <div class="header__content">
+      <h1 class="visually-hidden">Премиальные загородные дома</h1>
+
+      <section class="header__slider slider">
+        <div class="slider__item slider__item--current">
+          <img class="slider__img" src="assets/header-slide-1.jpg" alt="slide">
+          <h2 class="slider__title">Премиальные дома на&nbsp;зеленых участках</h2>
+          <p class="slider__text">Комфорт, природа, свобода</p>
+        </div>
+        <div class="slider__item">
+          <img class="slider__img" src="assets/header-slide-2.jpg" alt="slide">
+          <h2 class="slider__title">Премиальные дома на&nbsp;зеленых участках</h2>
+          <p class="slider__text">Комфорт, природа, свобода</p>
+        </div>
+        <div class="slider__item">
+          <img class="slider__img" src="assets/header-slide-3.jpg" alt="slide">
+          <h2 class="slider__title">Премиальные дома на&nbsp;зеленых участках</h2>
+          <p class="slider__text">Комфорт, природа, свобода</p>
+        </div>
+
+        <ul class="slider__togglers">
+          <li>
+            <button class="slider__btn slider__btn--prev" type="button" disabled>
+              <span class="visually-hidden">Назад</span>
+              <svg class="slider__btn-icon" width="19" height="14" viewBox="0 0 19 14"  xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 7.00008L17.7071 6.29297L18.4142 7.00008L17.7071 7.70719L17 7.00008ZM1 8.00008C0.447715 8.00008 0 7.55237 0 7.00008C0 6.4478 0.447715 6.00008 1 6.00008V8.00008ZM12.3738 0.959641L17.7071 6.29297L16.2929 7.70719L10.9596 2.37385L12.3738 0.959641ZM17.7071 7.70719L12.3738 13.0405L10.9596 11.6263L16.2929 6.29297L17.7071 7.70719ZM17 8.00008H1V6.00008H17V8.00008Z" />
+              </svg> 
+            </button>
+          </li>
+          <li>
+            <button class="slider__btn slider__btn--next" type="button">
+              <span class="visually-hidden">Вперед</span>
+              <svg class="slider__btn-icon" width="19" height="14" viewBox="0 0 19 14"  xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 7.00008L17.7071 6.29297L18.4142 7.00008L17.7071 7.70719L17 7.00008ZM1 8.00008C0.447715 8.00008 0 7.55237 0 7.00008C0 6.4478 0.447715 6.00008 1 6.00008V8.00008ZM12.3738 0.959641L17.7071 6.29297L16.2929 7.70719L10.9596 2.37385L12.3738 0.959641ZM17.7071 7.70719L12.3738 13.0405L10.9596 11.6263L16.2929 6.29297L17.7071 7.70719ZM17 8.00008H1V6.00008H17V8.00008Z" />
+              </svg>
+            </button>
+          </li>
+        </ul>
+
+        <button class="slider__modal-btn" type="button">Связаться</button>
+      </section>
+
+    </div>
+  </header>
+
+  <section class="works">
+    <h2 class="works__title">Работы</h2>
+
+    <div class="works__tabs tabs">
+      <ul class="tabs__links">
+        <li class="tabs__links-item">
+          <button class="tabs__link tabs__link--active" data-work="work-1" type="button">Каменный дом</button>
+        </li>
+        <li class="tabs__links-item">
+          <button class="tabs__link" data-work="work-2" type="button">Дом в горах</button>
+        </li>
+        <li class="tabs__links-item">
+          <button class="tabs__link" data-work="work-3" type="button">Дом с бассейном</button>
+        </li>
+      </ul>
+
+      <ul class="tabs__content tab-content">
+        <li id="work-1" class="tab-content__item tab-content__item--active">
+          <article class="tab-content__wrap">
+            <p class="tab-content__date">Срок постройки: 4 месяца</p>
+            <h3 class="tab-content__name">Каменный дом</h3>
+            <p class="tab-content__text">Концепция проекта: человеколюбивое, благополучное пространство. Качествами такового являются: забота, близость, друзья, демократичность, индивидуальность, чувство комфорта, приятные ощущения, семейный дом, органичность, простота и естественность форм.</p>
+            <a href="#" class="tab-content__link">Подробнее</a>
+          </article>
+          <img class="tab-content__img" src="assets/tab-1.png" alt="Каменный дом">
+        </li>
+
+        <li id="work-2" class="tab-content__item ">
+          <article class="tab-content__wrap"> 
+            <p class="tab-content__date">Срок постройки: 7 месяцев</p>
+            <h3 class="tab-content__name">Дом в горах</h3>
+            <p class="tab-content__text">Проект наглядно демонстрирует, как разместить несколько функциональных зон на открытой планировке загородного дома. Зоны выделены с помощью декоративных приемов: потолочных балок и деревянных панелей на стене в зоне гостиной.</p>
+            <a href="#" class="tab-content__link">Подробнее</a>
+          </article>  
+          <img class="tab-content__img" src="assets/tab-2.png" alt="Каменный дом">
+        </li>
+
+        <li id="work-3" class="tab-content__item">
+          <article class="tab-content__wrap">  
+            <p class="tab-content__date">Срок постройки: 12 месяцев</p>
+            <h3 class="tab-content__name">Дом c бассейном</h3>
+            <p class="tab-content__text">Вилла имеет три этажа. В доме – две кухни-столовые, две гостиные с каминами, две гостевые комнаты с ванными комнатами и большими террасами, главная спальня с ванной и гардеробной комнатами. Также здесь есть биллиардная и спа-зона, где расположены хамам, финская сауна, бассейн, зона релаксации и санузел.</p>
+            <a href="#" class="tab-content__link">Подробнее</a>
+          </article>
+          <img class="tab-content__img" src="assets/tab-3.png" alt="Каменный дом">
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2 class="faq__title">Частые вопросы</h2>
+
+    <ul class="faq__list">
+      <li class="faq__item">
+        <button class="faq__question" type="button">Сколько стоит построить дом?</button>
+        <div class="faq__answer">
+          <p>Все очень индивидуально и зависит от ваших желаний, материалов, места постройки и др. Обычно мы обсуждаем с клиентами первоначальную идею и концпецию, после чего предоставляем первоначальный расчет, на который можно ориентироваться.</p>
+        </div>
+      </li>
+
+      <li class="faq__item">
+        <button class="faq__question" type="button">Вы даете гарантию на свои дома?</button>
+        <div class="faq__answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate tempora recusandae laudantium, id labore minima rem quae, quo voluptatem facere commodi enim iure error. Porro quibusdam labore id magni voluptatem.</p>
+        </div>
+      </li>
+
+      <li class="faq__item">
+        <button class="faq__question" type="button">Из каких материалов строите дома?</button>
+        <div class="faq__answer">
+          <p>Cupiditate tempora recusandae laudantium, id labore minima rem quae, quo voluptatem facere commodi enim iure error. Porro quibusdam labore id magni voluptatem.</p>
+        </div>
+      </li>
+
+      <li class="faq__item">
+        <button class="faq__question" type="button">Как с вами связаться?</button>
+        <div class="faq__answer">
+          <p>Cupiditate tempora recusandae laudantium, id labore minima rem quae, quo voluptatem facere commodi enim iure error.</p>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+   <div class="modal"> 
+    <div class="modal__wrap">
+      <button class="modal__close-btn" type="button">
+        <img src="assets/icon-cross.svg" alt="закрыть">
+      </button>
+      <h2 class="modal__title">Связаться</h2>
+      <form action="#" class="modal__form callback">
+        <input class="callback__field" type="text" required placeholder="Имя">
+        <input class="callback__field" type="email" required placeholder="Email">
+        <textarea class="callback__field callback__field--message" placeholder="Ваше сообщение"></textarea> 
+        <input class="callback__button" type="submit" value="Отправить">
+      </form>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>  
+</body>
+</html>
