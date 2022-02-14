@@ -60,9 +60,9 @@ const windowHeight = document.documentElement.scrollHeight - document.documentEl
 
 window.addEventListener('scroll', () => {
 	// Записываем в константу величину вертикального скролла.
-	const windowScroll = window.pageYOffset; 
-	// Текущее значение скролла делим на максимальное значение скролла и округляем до двух цифр после запятой.
-	const progressBarWidth = (windowScroll / windowHeight).toFixed(2);
+	const windowScroll = window.pageYOffset;
+	// Текущее значение скролла делим на максимальное значение скролла и округляем до 4 цифр после запятой.
+	const progressBarWidth = (windowScroll / windowHeight).toFixed(4);
 	// Полученное выше значение будет являтся коэффициентом масштабирования для прогресс бара.
 	progressBar.setAttribute('style', `transform: scaleX(${progressBarWidth});`);
 });
@@ -278,4 +278,66 @@ for (let i = 0; i < titles.length; i++) {
 		toggleItem(titles[i]);
 		current = titles[i];
 	});
+}
+
+//--------------------------------------------------------
+// Анимация контента по скроллу
+//--------------------------------------------------------
+
+const screenHeight = document.documentElement.clientHeight;
+const contentBlocks = document.querySelectorAll('.content__block');
+
+function scrolling() {
+	for (let i = 0; i < contentBlocks.length; i++) {
+		const content = contentBlocks[i];
+		if (isPartiallyVisible(content)) {
+			content.classList.add('content__block--active');
+		} else {
+			content.classList.remove('content__block--active');
+		}
+	}
+}
+
+function isPartiallyVisible(element) {
+	// Получаем координаты нижней точки и высоты передаваемого функции блока.
+	const bottom = element.getBoundingClientRect().bottom;
+	const height = element.getBoundingClientRect().height;
+
+	/*Когда высота элемента плюс высота экрана больше его нижней координате, 
+	блок частично или полностью виден снизу экрана.*/
+	return height + screenHeight > bottom;
+	//return (top + height >= 0) && (height + screenHeight >= bottom);
+}
+
+window.addEventListener('scroll', scrolling);
+
+//--------------------------------------------
+// Горизонтальный скролл
+//--------------------------------------------
+
+const section = document.querySelector(".reviews");
+const list = section.querySelector(".reviews__list");
+
+const sectionWidth = section.clientWidth; // Ширина экрана
+const listWidth = list.scrollWidth; // Ширина прокручиваемых элементов
+
+let dist = 0; // Значение смещения элементов
+const step = 100; // Шаг прокрутки в пикселях
+
+/* Максимальное значение прокрутки maxDist с запасом на один шаг, 
+чтобы последний элемент был немного сдвинут от края контейнера, а не прижат к нему вплотную */
+const maxDist = listWidth - sectionWidth + step;
+
+section.addEventListener("wheel", wheelHandler);
+
+function wheelHandler(evt) {
+  evt.preventDefault(); // Отключаем вертикальный скролл, чтобы он не шёл параллельно с горизонтальным.
+
+	if (evt.deltaY > 0 && dist <= 0 && listWidth + dist > sectionWidth - step * 2) {
+    dist = dist - step;
+  } else if (dist < 0) {
+    dist = dist + step;
+  }
+
+	list.setAttribute("style", `transform: translateX(${dist}px)`);
 }
