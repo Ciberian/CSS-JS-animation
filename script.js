@@ -93,14 +93,17 @@ burgerBtn.addEventListener('click', () => {
 const header = document.querySelector('.header'); // нашли хедер
 const mainNav = header.querySelector('.header__wrapper'); // внутри хедера нашли блок с навигацией
 const backScrolledHeader = header.querySelector('.header__backscrolled'); // и нашли дополнительный блок
-const scrolledHeaderStart = header.offsetHeight; // сохранили высоту хедера в константу
-let scrollStarted = 0; // переменная для определения направления скролла - вверх или вниз.
 
-// слушаем событие скролла на окне браузера и при скролле вызываем функцию-коллбэк
+// Сохранили высоту хедера в константу, как только хедер проскроллится на всю высоту, всплывёт меню навигации.
+const scrolledHeaderStart = header.offsetHeight;
+// Переменная для определения направления скролла - вверх или вниз.
+let scrollStarted = 0; 
+
+// Слушаем событие скролла на окне браузера и при скролле вызываем функцию-коллбэк.
 window.addEventListener('scroll', headerScrollHandler);
 
 function headerScrollHandler() {
-	// записываем величину текущего скролла в константу
+	// Записываем величину текущего скролла в константу.
 	const scrollTop = window.pageYOffset;
 	// сохраняем разницу значений предыдущей и текущей прокрутки. Если delta меньше нуля, прокрутка сделана вверх.
 	const delta = scrollTop - scrollStarted;
@@ -109,16 +112,16 @@ function headerScrollHandler() {
      навигация появится вверху экрана за счёт добавления класса header__nav--fixed */
 	if (scrollTop >= scrolledHeaderStart) {
 		mainNav.classList.add('header__nav--fixed');
-		header.style.marginBottom = `${mainNav.offsetHeight}px`;
+		document.body.style.paddingTop = `${mainNav.offsetHeight}px`;
 	} else {
 		mainNav.classList.remove('header__nav--fixed');
-		header.style.marginBottom = `0px`;
+		document.body.style.paddingTop = `0px`;
 	}
 
 	if (delta < 0 && scrollTop >= scrolledHeaderStart) {
-		backScrolledHeader.classList.add('header__backscrolled--show');
+		backScrolledHeader.classList.add('backscroll-header--show');
 	} else {
-		backScrolledHeader.classList.remove('header__backscrolled--show');
+		backScrolledHeader.classList.remove('backscroll-header--show');
 	}
 	scrollStarted = scrollTop;
 }
@@ -283,7 +286,6 @@ for (let i = 0; i < titles.length; i++) {
 //--------------------------------------------------------
 // Анимация контента по скроллу
 //--------------------------------------------------------
-
 const screenHeight = document.documentElement.clientHeight;
 const contentBlocks = document.querySelectorAll('.content__block');
 
@@ -304,26 +306,24 @@ function isPartiallyVisible(element) {
 	const height = element.getBoundingClientRect().height;
 
 	/*Когда высота элемента плюс высота экрана больше его нижней координате, 
-	блок частично или полностью виден снизу экрана.*/
-	return height + screenHeight > bottom;
+	блок частично или полностью виден снизу экрана. 
+	Анимация сработает когда блок покажется на половину своей высоты */
+	return height * 0.5 + screenHeight > bottom; 
 	//return (top + height >= 0) && (height + screenHeight >= bottom);
 }
 
 window.addEventListener('scroll', scrolling);
 
 //--------------------------------------------
-// Горизонтальный скролл
+// Горизонтальный скролл блока отзывов
 //--------------------------------------------
-
 const section = document.querySelector(".reviews");
 const list = section.querySelector(".reviews__list");
 
 const sectionWidth = section.clientWidth; // Ширина экрана
 const listWidth = list.scrollWidth; // Ширина прокручиваемых элементов
-
 let dist = 0; // Значение смещения элементов
 const step = 100; // Шаг прокрутки в пикселях
-
 /* Максимальное значение прокрутки maxDist с запасом на один шаг, 
 чтобы последний элемент был немного сдвинут от края контейнера, а не прижат к нему вплотную */
 const maxDist = listWidth - sectionWidth + step;
