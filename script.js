@@ -50,6 +50,24 @@ btnOpen.addEventListener('click', modalOpenHandler);
 btnClose.addEventListener('click', modalCloseHandler);
 
 //-----------------------------------------
+// Прогресс бар
+//-----------------------------------------
+
+const progressBar = document.querySelector('.progress-bar__value');
+// Вычисляем на сколько пикселей вниз мы можем проскроллить.
+// Для этого из высоты всего документа(scrollHeight) вычитаем высоту области просмотра(clientHeigth).
+const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+window.addEventListener('scroll', () => {
+	// Записываем в константу величину вертикального скролла.
+	const windowScroll = window.pageYOffset; 
+	// Текущее значение скролла делим на максимальное значение скролла и округляем до двух цифр после запятой.
+	const progressBarWidth = (windowScroll / windowHeight).toFixed(2);
+	// Полученное выше значение будет являтся коэффициентом масштабирования для прогресс бара.
+	progressBar.setAttribute('style', `transform: scaleX(${progressBarWidth});`);
+});
+
+//-----------------------------------------
 // Вызов меню навигации
 //-----------------------------------------
 const menuNav = document.querySelector('.menu__nav');
@@ -62,11 +80,11 @@ burgerBtn.addEventListener('click', () => {
 	menuNav.classList.toggle('menu--open');
 	burgerBtn.classList.toggle('menu--open');
 
-  // При открытом меню убераем вертикльную полосу прокрутки.
-  // Иначе логотип и бургер-кнопка уедут за пределы экран при скролле.
-  if (menuNav.classList.contains('menu--open')) {
-    document.body.setAttribute('style', 'overflow: hidden');
-  } else document.body.removeAttribute('style');
+	// При открытом меню убераем вертикльную полосу прокрутки.
+	// Иначе логотип и бургер-кнопка уедут за пределы экран при скролле.
+	if (menuNav.classList.contains('menu--open')) {
+		document.body.setAttribute('style', 'overflow: hidden');
+	} else document.body.removeAttribute('style');
 });
 
 //--------------------------------------------
@@ -81,12 +99,11 @@ let scrollStarted = 0; // переменная для определения н�
 // слушаем событие скролла на окне браузера и при скролле вызываем функцию-коллбэк
 window.addEventListener('scroll', headerScrollHandler);
 
-
-function headerScrollHandler () {
+function headerScrollHandler() {
 	// записываем величину текущего скролла в константу
-	const scrollTop = window.pageYOffset; 
+	const scrollTop = window.pageYOffset;
 	// сохраняем разницу значений предыдущей и текущей прокрутки. Если delta меньше нуля, прокрутка сделана вверх.
-	const delta = scrollTop - scrollStarted; 
+	const delta = scrollTop - scrollStarted;
 
 	/* как только высота прокрутки страницы сравняется с высотой хедера, 
      навигация появится вверху экрана за счёт добавления класса header__nav--fixed */
@@ -98,19 +115,18 @@ function headerScrollHandler () {
 		header.style.marginBottom = `0px`;
 	}
 
-	if ((delta < 0) && (scrollTop >= scrolledHeaderStart)) {
-    backScrolledHeader.classList.add('header__backscrolled--show');
-  } else {
-    backScrolledHeader.classList.remove('header__backscrolled--show');
-  }
+	if (delta < 0 && scrollTop >= scrolledHeaderStart) {
+		backScrolledHeader.classList.add('header__backscrolled--show');
+	} else {
+		backScrolledHeader.classList.remove('header__backscrolled--show');
+	}
 	scrollStarted = scrollTop;
-
-};
+}
 
 //--------------------------------------------
 // Слайдер
 //--------------------------------------------
-const sliderBox = document.querySelector(".slider");
+const sliderBox = document.querySelector('.slider');
 const slides = sliderBox.querySelectorAll('.slider__item');
 const btnPrev = sliderBox.querySelector('.slider__btn--prev');
 const btnNext = sliderBox.querySelector('.slider__btn--next');
@@ -191,21 +207,20 @@ btnPrev.addEventListener('click', () => {
 const tabLinks = document.querySelectorAll('.tabs__link');
 const tabContents = document.querySelectorAll('.tab-content__item');
 
-// Для каждой кнопки устанавливаем слушатель событий, 
+// Для каждой кнопки устанавливаем слушатель событий,
 // который при клике на кнопку будет вызвать функцию openTabs.
 tabLinks.forEach(function (element) {
 	element.addEventListener('click', openTabs);
 });
 
-
 function openTabs(evt) {
-  // Находим кнопку на которой произошло событие клика и записываем её в константу
+	// Находим кнопку на которой произошло событие клика и записываем её в константу
 	const btnTarget = evt.currentTarget;
-  // У найденной кнопку получаем данные записанные в её атрибуте data-
+	// У найденной кнопку получаем данные записанные в её атрибуте data-
 	const work = btnTarget.dataset.work;
 
-  // Удаляем "активные" классы у всех кнопок и блоков контента,
-  // для того чтобы была только одна активная вкладка, а не все одновременно.
+	// Удаляем "активные" классы у всех кнопок и блоков контента,
+	// для того чтобы была только одна активная вкладка, а не все одновременно.
 	tabContents.forEach(function (item) {
 		item.classList.remove('tab-content__item--active');
 	});
@@ -213,8 +228,8 @@ function openTabs(evt) {
 		item.classList.remove('tabs__link--active');
 	});
 
-  // Находим по id контент соответствующий значению атрибута дата той кнопки, по которой кликнули
-  // Самой кнопке также навешиваем класс определяющий её стили в выбранном состоянии
+	// Находим по id контент соответствующий значению атрибута дата той кнопки, по которой кликнули
+	// Самой кнопке также навешиваем класс определяющий её стили в выбранном состоянии
 	document.querySelector(`#${work}`).classList.add('tab-content__item--active');
 	btnTarget.classList.add('tabs__link--active');
 }
