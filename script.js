@@ -320,22 +320,22 @@ window.addEventListener('scroll', scrolling);
 const section = document.querySelector(".reviews");
 const list = section.querySelector(".reviews__list");
 
-const sectionWidth = section.clientWidth; // Ширина экрана
+const sectionWidth = section.clientWidth; // Ширина области прокрутки
 const listWidth = list.scrollWidth; // Ширина прокручиваемых элементов
 let dist = 0; // Значение смещения элементов
 const step = 100; // Шаг прокрутки в пикселях
-/* Максимальное значение прокрутки maxDist с запасом на один шаг, 
-чтобы последний элемент был немного сдвинут от края контейнера, а не прижат к нему вплотную */
-const maxDist = listWidth - sectionWidth + step;
+const maxDist = listWidth - sectionWidth; // Максимальное значение прокрутки
 
 section.addEventListener("wheel", wheelHandler);
 
 function wheelHandler(evt) {
   evt.preventDefault(); // Отключаем вертикальный скролл, чтобы он не шёл параллельно с горизонтальным.
 
-	if (evt.deltaY > 0 && dist <= 0 && listWidth + dist > sectionWidth - step * 2) {
+	if (evt.deltaY > 0 &&
+			dist <= 0 &&
+			listWidth + dist > sectionWidth - step) {
     dist = dist - step;
-  } else if (dist < 0) {
+  } else if (dist < 0 && evt.deltaY < 0) {
     dist = dist + step;
   }
 
