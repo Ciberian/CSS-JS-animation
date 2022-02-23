@@ -760,19 +760,19 @@ body {
 
 .faq__question {
 	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px;
+	margin-bottom: 20px;
+	color: inherit;
 	font-weight: bold;
 	font-size: 32px;
 	line-height: 44px;
 	text-align: start;
 	background-color: transparent;
-	color: inherit;
 	border: none;
-	padding: 0px;
-	margin-bottom: 20px;
 	cursor: pointer;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .faq__question::after {
@@ -793,12 +793,12 @@ body {
 	max-height: 0px;
 	font-size: 16px;
 	line-height: 22px;
-	transition: max-height 0.3s ease;
+	transition: max-height 0.4s ease;
 }
 
-.faq__answer * {
-	margin-top: 20px;
-	margin-bottom: 20px;
+.faq__answer p {
+	margin: 0;
+	padding-bottom: 20px;
 }
 
 /*---------------- Контент ----------------*/

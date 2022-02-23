@@ -254,6 +254,7 @@ const toggleItem = (title) => {
 	title.classList.toggle('faq__question--open');
 
 	const content = title.nextElementSibling;
+	
 	if (content.style.maxHeight) {
 		content.style.maxHeight = null;
 	} else {
